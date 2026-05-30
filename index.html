@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTKL - Ôn thi Tin học THPTQG</title>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS style -->
+    <link rel="stylesheet" href="css/style.css?v=37">
+</head>
+<body>
+    <!-- App Header -->
+    <header class="app-header" id="appHeader">
+        <div class="header-container">
+            <a href="#home" class="logo-link">
+                <div class="logo">
+                    <span class="logo-accent">MT</span>KL
+                </div>
+            </a>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="#home" class="nav-item active" data-page="home">Trang chủ</a>
+                <a href="#review-sets" class="nav-item" data-page="review-sets">Bộ ôn tập</a>
+                <a href="#progress" class="nav-item" data-page="progress">Tiến độ</a>
+                <a href="#leaderboard" class="nav-item" data-page="leaderboard">Xếp hạng</a>
+                <a href="#about" class="nav-item" data-page="about">Giới thiệu</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark Mode" style="background:none; border:none; font-size:1.2rem; cursor:pointer; margin-right:10px;">🌙</button>
+                <span class="streak-badge-wrapper" id="streakBadgeWrapper" style="display: none;">
+                    <span class="streak-icon">🔥</span>
+                    <span class="streak-count" id="streakCount">0</span> ngày
+                </span>
+                <button class="btn btn-secondary btn-login" id="headerLoginBtn">Đăng nhập</button>
+                <button class="btn btn-primary" id="headerStartBtn">Bắt đầu ôn tập</button>
+                <div class="user-profile-menu" id="userProfileMenu" style="display: none;">
+                    <div class="avatar" id="userAvatar">U</div>
+                    <div class="profile-dropdown">
+                        <div class="dropdown-header">
+                            <p class="dropdown-name" id="userDropdownName">Học sinh</p>
+                            <p class="dropdown-email" id="userDropdownEmail">user@example.com</p>
+                        </div>
+                        <hr>
+                        <a href="#progress" class="dropdown-item">Trang cá nhân</a>
+                        <button class="dropdown-item" id="aiSettingsBtn">Cài đặt AI OCR</button>
+                        <button class="dropdown-item text-danger" id="resetDataBtn">Reset dữ liệu</button>
+                        <button class="dropdown-item text-danger" id="logoutBtn">Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-nav-toggle" aria-label="Toggle menu" id="mobileNavToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main App Container -->
+    <main class="app-content" id="appContent">
+        <!-- SPA Pages will be rendered dynamically here -->
+        <div class="page-loading">
+            <div class="spinner"></div>
+            <p>Đang tải ứng dụng...</p>
+        </div>
+    </main>
+
+    <!-- App Footer -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-accent">MT</span>KL
+                </div>
+                <p class="footer-tagline">Nền tảng ôn thi Tin học THPTQG thông minh, cá nhân hóa lỗi sai giúp bứt phá điểm số.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-links-group">
+                <div class="footer-links-col">
+                    <h4>Nội dung ôn thi</h4>
+                    <ul>
+                        <li><a href="#home">Lớp 10 (Kết nối/Cánh diều/Chân trời)</a></li>
+                        <li><a href="#home">Lớp 11 (Cơ sở dữ liệu)</a></li>
+                        <li><a href="#home">Lớp 12 (Thiết kế Web HTML/CSS)</a></li>
+                        <li><a href="#home">Chuyên đề học tập Tin học</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Hệ thống</h4>
+                    <ul>
+                        <li><a href="#review-sets">Bộ câu hỏi sai</a></li>
+                        <li><a href="#progress">Theo dõi tiến độ</a></li>
+                        <li><a href="#leaderboard">Bảng vàng xếp hạng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Về chúng tôi</h4>
+                    <ul>
+                        <li><a href="#about">Phương pháp Spaced Repetition</a></li>
+                        <li><a href="#about">Đội ngũ phát triển</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MTKL Learning Platform. All rights reserved. Được thiết kế cho học sinh THPTQG.</p>
+        </div>
+    </footer>
+
+    <!-- Auth Modal (Login / Register) -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-card auth-card">
+            <button class="modal-close" id="closeAuthModal" aria-label="Đóng modal">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tabLoginBtn">Đăng nhập</button>
+                <button class="auth-tab" id="tabRegisterBtn">Đăng ký</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginEmail">Email học sinh</label>
+                    <input type="email" id="loginEmail" placeholder="hocsinh@viethoc.edu.vn" required>
+                    <span class="error-message" id="loginEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mật khẩu</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    <span class="error-message" id="loginPasswordError"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">Đăng nhập</button>
+                
+                <div class="auth-divider">
+                    <span>Hoặc đăng nhập nhanh bằng</span>
+                </div>
+
+                <div class="social-login-group">
+                    <button type="button" class="btn btn-social btn-google" id="googleLoginBtn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.24 10.285V13.4h6.887c-.648 2.41-2.519 4.13-5.136 4.13A5.71 5.71 0 0 1 8.2 11.83a5.71 5.71 0 0 1 5.79-5.7c1.47 0 2.82.5 3.9 1.34l2.455-2.456A9.68 9.68 0 0 0 13.99 3c-5.36 0-9.73 4.37-9.73 9.73s4.37 9.73 9.73 9.73c5.18 0 9.3-3.66 9.3-9.3 0-.61-.06-1.22-.17-1.875H12.24z"/></svg>
+                        Google
+                    </button>
+                    <button type="button" class="btn btn-social btn-facebook" id="facebookLoginBtn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                        Facebook
+                    </button>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="regName">Họ và tên</label>
+                    <input type="text" id="regName" placeholder="Nguyễn Văn A" required>
+                    <span class="error-message" id="regNameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email học sinh</label>
+                    <input type="email" id="regEmail" placeholder="hocsinh@viethoc.edu.vn" required>
+                    <span class="error-message" id="regEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Mật khẩu</label>
+                    <input type="password" id="regPassword" placeholder="Tối thiểu 6 ký tự" required>
+                    <span class="error-message" id="regPasswordError"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="registerSubmitBtn">Đăng ký tài khoản</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- OTP Verification Modal -->
+    <div class="modal-overlay" id="otpModal">
+        <div class="modal-card otp-card">
+            <div class="otp-header">
+                <div class="otp-icon">✉️</div>
+                <h3>Xác thực tài khoản</h3>
+                <p>Chúng tôi đã gửi mã OTP 6 số đến email <strong id="otpEmailLabel">hocsinh@example.com</strong>. Vui lòng nhập mã để kích hoạt.</p>
+            </div>
+
+            <form id="otpForm">
+                <div class="otp-inputs">
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="otp-field" required>
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="otp-field" required disabled>
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="otp-field" required disabled>
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="otp-field" required disabled>
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="otp-field" required disabled>
+                    <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="otp-field" required disabled>
+                </div>
+                <span class="error-message text-center" id="otpError" style="display: block; margin-top: 10px;"></span>
+
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px;" id="otpSubmitBtn">Xác nhận mã OTP</button>
+
+                <div class="otp-resend">
+                    Chưa nhận được mã? <button type="button" class="btn-resend-otp" id="resendOtpBtn" disabled>Gửi lại mã (<span id="resendCountdown">60</span>s)</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- External Libraries -->
+    <!-- AI Settings Modal -->
+    <div class="modal-overlay" id="aiSettingsModal">
+        <div class="modal-card" style="max-width: 600px;">
+            <button class="modal-close" id="closeAiSettingsModal" aria-label="Đóng modal">&times;</button>
+            <div style="padding: 24px;">
+                <h3 style="margin-bottom: 16px; font-size: 1.5rem;">Cài đặt AI OCR (Tự động kẻ bảng)</h3>
+                <p style="margin-bottom: 20px; color: var(--text-secondary); line-height: 1.6;">Để hệ thống có thể tự động bóc tách và vẽ bảng chính xác 100%, bạn cần cung cấp một khóa <strong>Google Gemini API Key</strong> miễn phí. Khóa này chỉ được lưu cục bộ trên trình duyệt của bạn.</p>
+                
+                <div class="form-group" style="margin-bottom: 24px;">
+                    <label for="geminiApiKey" style="font-weight: 700; margin-bottom: 8px; display: inline-block;">Nhập Gemini API Key của bạn:</label>
+                    <input type="password" id="geminiApiKey" class="form-control" placeholder="AIzaSy...">
+                </div>
+
+                <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; border: 1px solid var(--border-dark); margin-bottom: 24px;">
+                    <h4 style="margin-bottom: 12px; font-weight: 700;">📚 Hướng dẫn lấy Key miễn phí (Chỉ mất 1 phút)</h4>
+                    <ol style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                        <li>Truy cập <strong><a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--primary-color);">Google AI Studio</a></strong>.</li>
+                        <li>Đăng nhập bằng tài khoản Google (Gmail) của bạn.</li>
+                        <li>Nhấn nút <strong>"Create API key"</strong> (Màu xanh) -> Chọn <em>Create API key in new project</em>.</li>
+                        <li>Một mã bảo mật (bắt đầu bằng <code>AIzaSy...</code>) sẽ hiện ra. Hãy Copy (Sao chép) mã đó.</li>
+                        <li>Quay lại trang web này, Paste (Dán) mã vào ô phía trên và nhấn Lưu.</li>
+                    </ol>
+                </div>
+
+                <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                    <button class="btn btn-secondary" id="cancelAiSettingsBtn">Đóng</button>
+                    <button class="btn btn-primary" id="saveAiSettingsBtn">Lưu Cài Đặt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Compat Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <!-- Application Javascript files -->
+    <script src="js/firebase-config.js?v=54"></script>
+    <script src="js/data.js?v=54"></script>
+    <script src="js/components.js?v=54"></script>
+    <script src="js/app.js?v=54"></script>
+</body>
+</html>
