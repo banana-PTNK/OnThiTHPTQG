@@ -128,12 +128,13 @@ const app = {
     handleRouting() {
         const hash = window.location.hash || '#home';
         const pageName = hash.substring(1);
-        this.state.activePage = pageName;
+        const basePath = pageName.split('?')[0];
+        this.state.activePage = basePath;
 
         // Cập nhật trạng thái active trên Navigation
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
-            if (item.getAttribute('data-page') === pageName) {
+            if (item.getAttribute('data-page') === basePath) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');
@@ -152,7 +153,7 @@ const app = {
         document.getElementById('mainNav').classList.remove('show');
 
         // Render trang dựa vào hash ngay lập tức (không có độ trễ)
-        switch (pageName) {
+        switch (basePath) {
             case 'home':
                 MTKL_Components.renderHome(appContent);
                 break;
@@ -176,6 +177,9 @@ const app = {
                 break;
             case 'about':
                 MTKL_Components.renderAbout(appContent);
+                break;
+            case 'feedback':
+                MTKL_Components.renderFeedback(appContent);
                 break;
             default:
                 window.location.hash = '#home';
